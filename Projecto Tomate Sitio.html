@@ -124,9 +124,9 @@
 
     function payWithCrypto(tipo) {
       const addresses = {
-        litecoin: 'TU_DIRECCION_LITECOIN',
-        ethereum: 'TU_DIRECCION_ETHEREUM',
-        bitcoin: 'TU_DIRECCION_BITCOIN'
+        litecoin: 'LQAYLTbGjwQo7qKDQT4Umvmw7jRFYMXVdf 
+        ethereum: '0xed04E203aa3198ced5CB87bE018d5A1A41D6048b 
+        bitcoin: 'bc1qr95umq5fd6n5vsmnk9sv3ayzmnwkwuy302dw77 
       };
       const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
       alert(`Envía ${total.toFixed(2)} USD en ${tipo.toUpperCase()} a la siguiente dirección:\n\n${addresses[tipo]}`);
