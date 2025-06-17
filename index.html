@@ -112,29 +112,3 @@
         total += item.price * (item.quantity || 1);
         return `<li>${item.name} x${item.quantity || 1} - $${(item.price * (item.quantity || 1)).toFixed(2)}</li>`;
       }).join('') + `</ul><p>Total: <strong>$${total.toFixed(2)}</strong></p>`;
-    }
-
-    function payWithPaypal() {
-      // Reemplaza TU_CORREO con tu cuenta de PayPal real
-      const email = "TU_CORREO@ejemplo.com";
-      const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
-      const url = `https://www.paypal.com/paypalme/${email}/${total.toFixed(2)}`;
-      window.open(url, '_blank');
-    }
-
-    function payWithCrypto(tipo) {
-      const addresses = {
-        litecoin: 'LQAYLTbGjwQo7qKDQT4Umvmw7jRFYMXVdf 
-        ethereum: '0xed04E203aa3198ced5CB87bE018d5A1A41D6048b 
-        bitcoin: 'bc1qr95umq5fd6n5vsmnk9sv3ayzmnwkwuy302dw77 
-      };
-      const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
-      alert(`Envía ${total.toFixed(2)} USD en ${tipo.toUpperCase()} a la siguiente dirección:\n\n${addresses[tipo]}`);
-    }
-
-    // On page load
-    updateCart();
-    renderCart();
-</script>
-</body>
-</html>
