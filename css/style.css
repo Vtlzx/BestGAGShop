@@ -3,12 +3,12 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f7f7f7;
+  background: #ffbaba;
   color: #222;
 }
 
 header {
-  background: #fff;
+  background: #ffb3b3;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   padding: 24px 0 12px 0;
   text-align: center;
@@ -31,7 +31,7 @@ header {
   color: #1a1a1a;
 }
 .tagline {
-  color: #ff6600;
+  color: #80dbff;
   font-weight: 500;
   margin-top: 4px;
 }
@@ -41,7 +41,7 @@ header {
   background-position: center;
   padding: 60px 20px 40px 20px;
   text-align: center;
-  color: #fff;
+  color: #def2ff;
   position: relative;
 }
 .hero h2 {
