@@ -107,6 +107,11 @@
       const total = cart.reduce((sum, item) => sum + item.price, 0);
       document.getElementById('payment-info').innerHTML = `<p>Send <strong>$${total.toFixed(2)}</strong> in <strong>${type.toUpperCase()}</strong> to this address:<br><code>${addresses[type]}</code></p>`;
     }
+
+    // Ensure cart and payment info update on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCart();
+    });
 </script>
 </body>
 </html>
