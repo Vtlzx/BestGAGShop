@@ -81,37 +81,3 @@
       });
       totalDisplay.textContent = total.toFixed(2);
     }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      updateCart();
-      // Attach event listeners for payment buttons if needed
-      document.querySelectorAll('.payment-section button').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-        });
-      });
-    });
-
-    function payWithPaypal() {
-      const email = "YOUR_PAYPAL_EMAIL"; // Replace with your PayPal email or username
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      const url = `https://www.paypal.com/paypalme/${email}/${total.toFixed(2)}`;
-      document.getElementById('payment-info').innerHTML = `<p>Click <a href='${url}' target='_blank'>here</a> to pay $${total.toFixed(2)} with PayPal.</p>`;
-    }
-
-    function payWithCrypto(type) {
-      const addresses = {
-        litecoin: 'bc1qr95umq5fd6n5vsmnk9sv3ayzmnwkwuy302dw77 
-        ethereum: '0xed04E203aa3198ced5CB87bE018d5A1A41D6048b                           
-      };
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      document.getElementById('payment-info').innerHTML = `<p>Send <strong>$${total.toFixed(2)}</strong> in <strong>${type.toUpperCase()}</strong> to this address:<br><code>${addresses[type]}</code></p>`;
-    }
-
-    // Ensure cart and payment info update on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      updateCart();
-    });
-</script>
-</body>
-</html>
