@@ -145,19 +145,19 @@
       <img src="https://petmart.fun/_nuxt/img/producto1.3b7b3b2.png" alt="Disco Bee" />
       <h3>Disco Bee</h3>
       <p>$24.99</p>
-      <button onclick="addToCart('Disco Bee', $24.99)">Add to Cart</button>
+      <button onclick="addToCart('Disco Bee', $25)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://petmart.fun/_nuxt/img/producto2.5d3a51a.png" alt="Raccoon" />
       <h3>Raccoon</h3>
-      <p>$13.99</p>
-      <button onclick="addToCart('Raccoon', $13.99)">Add to Cart</button>
+      <p>$14</p>
+      <button onclick="addToCart('Raccoon', $14)">Add to Cart</button>
     </div>
     <div class="product">
       <img src="https://petmart.fun/_nuxt/img/producto3.79a1f21.png" alt="Dragonfly" />
       <h3>Dragonfly</h3>
       <p>$9.99</p>
-      <button onclick="addToCart('Dragonfly', 9.99)">Add to Cart</button>
+      <button onclick="addToCart('Dragonfly', $10)">Add to Cart</button>
     </div>
   </section>
 
@@ -243,7 +243,26 @@
         alert("Your cart is empty.");
         return;
       }
+      alert("Thank you for your payment! We will process your order shortly.");
+    }
   </script>
 
 </body>
 </html>
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = 3001;
+
+app.use(cors());
+app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+  res.send('Backend de BestGAGShop funcionando!');
+});
+
+app.listen(PORT, () => {
+  console.log(`Backend de BestGAGShop corriendo en http://localhost:${PORT}`);
+});
