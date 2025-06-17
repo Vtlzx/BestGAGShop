@@ -82,6 +82,16 @@
       totalDisplay.textContent = total.toFixed(2);
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCart();
+      // Attach event listeners for payment buttons if needed
+      document.querySelectorAll('.payment-section button').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+        });
+      });
+    });
+
     function payWithPaypal() {
       const email = "YOUR_PAYPAL_EMAIL"; // Replace with your PayPal email or username
       const total = cart.reduce((sum, item) => sum + item.price, 0);
