@@ -48,67 +48,33 @@
     </section>
 </main>
 
-<section class="checkout-section">
-  <h2>Finaliza tu compra</h2>
-  <div class="cart-summary" id="cart-summary">
-    <!-- Aquí se llenará con los productos del carrito -->
-  </div>
-
-  <h3>Selecciona tu método de pago</h3>
-  <div class="payment-options">
-    <button onclick="payWithPaypal()">Pagar con PayPal</button>
-    <button onclick="payWithCrypto('litecoin')">Litecoin</button>
-    <button onclick="payWithCrypto('ethereum')">Ethereum</button>
-    <button onclick="payWithCrypto('bitcoin')">Bitcoin</button>
-  </div>
-</section>
-
 <footer>
     <p>&copy; 2025 BestGAGShop. All rights reserved.</p>
 </footer>
 
 <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = [];
 
     function addToCart(productName, price) {
-      // Check if product already in cart
-      const found = cart.find(item => item.name === productName);
-      if (found) {
-        found.quantity = (found.quantity || 1) + 1;
-      } else {
-        cart.push({ name: productName, price, quantity: 1 });
-      }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
-      renderCart();
+    cart.push({ name: productName, price });
+    updateCart();
     }
 
     function updateCart() {
-      const cartItems = document.getElementById("cart-items");
-      const totalDisplay = document.getElementById("total");
+    const cartItems = document.getElementById("cart-items");
+    const totalDisplay = document.getElementById("total");
 
-      cartItems.innerHTML = "";
-      let total = 0;
+    cartItems.innerHTML = "";
+    let total = 0;
 
-      cart.forEach((item, index) => {
-        total += item.price * (item.quantity || 1);
+    cart.forEach((item, index) => {
+        total += item.price;
         const li = document.createElement("li");
-        li.textContent = `${item.name} x${item.quantity || 1} - $${(item.price * (item.quantity || 1)).toFixed(2)}`;
+        li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
         cartItems.appendChild(li);
-      });
+    });
 
-      totalDisplay.textContent = total.toFixed(2);
+    totalDisplay.textContent = total.toFixed(2);
     }
-
-    function renderCart() {
-      const summary = document.getElementById('cart-summary');
-      if (!summary) return;
-      if (cart.length === 0) {
-        summary.innerHTML = '<p>Tu carrito está vacío.</p>';
-        return;
-      }
-      let total = 0;
-      summary.innerHTML = '<ul>' + cart.map(item => {
-        total += item.price * (item.quantity || 1);
-        return `<li>${item.name} x${item.quantity || 1} - $${(item.price * (item.quantity || 1)).toFixed(2)}</li>`;
-      }).join('') + `</ul><p>Total: <strong>$${total.toFixed(2)}</strong></p>`;
+</script>
+</body>
