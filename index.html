@@ -78,4 +78,118 @@
     }
   </script>
 </body>
-</html>
+</html><!-- index.html (segunda parte - Checkout y Métodos de Pago) -->
+<section class="checkout-section">
+  <h2>Finaliza tu compra</h2>
+  <div class="cart-summary" id="cart-summary">
+    <!-- Aquí se llenará con los productos del carrito -->
+  </div>
+
+  <h3>Selecciona tu método de pago</h3>
+  <div class="payment-options">
+    <button onclick="showPaymentForm('paypal')">Pagar con PayPal</button>
+    <button onclick="showPaymentForm('litecoin')">Litecoin</button>
+    <button onclick="showPaymentForm('ethereum')">Ethereum</button>
+    <button onclick="showPaymentForm('bitcoin')">Bitcoin</button>
+  </div>
+
+  <div class="payment-form" id="payment-form" style="display: none;">
+    <h4>Ingresa tu usuario de Roblox:</h4>
+    <input type="text" id="roblox-username" placeholder="Usuario de Roblox" required>
+    <div id="payment-instructions"></div>
+    <p>Únete a nuestro Discord: <a href="https://discord.gg/fUTHbgYF" target="_blank">https://discord.gg/fUTHbgYF</a></p>
+  </div>
+</section>
+
+<script>
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function renderCart() {
+    const summary = document.getElementById('cart-summary');
+    if (cart.length === 0) {
+      summary.innerHTML = '<p>Tu carrito está vacío.</p>';
+      return;
+    }
+    let total = 0;
+    summary.innerHTML = '<ul>' + cart.map(item => {
+      total += item.price * item.quantity;
+      return `<li>${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}</li>`;
+    }).join('') + `</ul><p>Total: <strong>$${total.toFixed(2)}</strong></p>`;
+  }
+
+  function showPaymentForm(method) {
+    const username = document.getElementById('roblox-username').value;
+    const form = document.getElementById('payment-form');
+    const instructions = document.getElementById('payment-instructions');
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    let content = '';
+
+    switch (method) {
+      case 'paypal':
+        content = `
+          <p>Envía el pago de <strong>$${total.toFixed(2)}</strong> a:</p>
+          <p><strong>PayPal:</strong> TU_CORREO@ejemplo.com</p>
+          <p>Después del pago, comparte tu usuario de Roblox: <strong>${username || '[tu usuario aquí]'}</strong></p>
+        `;
+        break;
+      case 'litecoin':
+      case 'ethereum':
+      case 'bitcoin':
+        const addresses = {
+          litecoin: 'LQAYLTbGjwQo7qKDQT4Umvmw7jRFYMXVdf',
+          ethereum: '0xed04E203aa3198ced5CB87bE018d5A1A41D6048b',
+          bitcoin: 'bc1qr95umq5fd6n5vsmnk9sv3ayzmnwkwuy302dw77'
+        };
+        content = `
+          <p>Envía <strong>$${total.toFixed(2)}</strong> en <strong>${method.toUpperCase()}</strong> a:</p>
+          <p><strong>${addresses[method]}</strong></p>
+          <p>Después del pago, comparte tu usuario de Roblox: <strong>${username || '[tu usuario aquí]'}</strong></p>
+        `;
+        break;
+    }
+
+    instructions.innerHTML = content;
+    form.style.display = 'block';
+  }
+
+  renderCart();
+</script>
+
+<style>
+.checkout-section {
+  padding: 2rem;
+  background: #f5f5f5;
+  border-top: 2px solid #ddd;
+}
+.cart-summary {
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+.payment-options button {
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background-color: #222;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.payment-options button:hover {
+  background-color: #555;
+}
+.payment-form {
+  margin-top: 2rem;
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.payment-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+</style>
