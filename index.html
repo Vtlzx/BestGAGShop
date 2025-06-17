@@ -45,6 +45,14 @@
     <h2>Your Cart</h2>
     <ul id="cart-items"></ul>
     <p>Total: $<span id="total">0.00</span></p>
+    <div class="payment-section">
+      <h3>Pay with:</h3>
+      <button onclick="payWithPaypal()">PayPal</button>
+      <button onclick="payWithCrypto('litecoin')">Litecoin</button>
+      <button onclick="payWithCrypto('ethereum')">Ethereum</button>
+      <button onclick="payWithCrypto('bitcoin')">Bitcoin</button>
+      <div id="payment-info" class="payment-info"></div>
+    </div>
     </section>
 </main>
 
@@ -56,25 +64,39 @@
     let cart = [];
 
     function addToCart(productName, price) {
-    cart.push({ name: productName, price });
-    updateCart();
+      cart.push({ name: productName, price });
+      updateCart();
     }
 
     function updateCart() {
-    const cartItems = document.getElementById("cart-items");
-    const totalDisplay = document.getElementById("total");
-
-    cartItems.innerHTML = "";
-    let total = 0;
-
-    cart.forEach((item, index) => {
+      const cartItems = document.getElementById("cart-items");
+      const totalDisplay = document.getElementById("total");
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach((item, index) => {
         total += item.price;
         const li = document.createElement("li");
         li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
         cartItems.appendChild(li);
-    });
+      });
+      totalDisplay.textContent = total.toFixed(2);
+    }
 
-    totalDisplay.textContent = total.toFixed(2);
+    function payWithPaypal() {
+      const email = "YOUR_PAYPAL_EMAIL"; // Replace with your PayPal email or username
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      const url = `https://www.paypal.com/paypalme/${email}/${total.toFixed(2)}`;
+      document.getElementById('payment-info').innerHTML = `<p>Click <a href='${url}' target='_blank'>here</a> to pay $${total.toFixed(2)} with PayPal.</p>`;
+    }
+
+    function payWithCrypto(type) {
+      const addresses = {
+        litecoin: 'bc1qr95umq5fd6n5vsmnk9sv3ayzmnwkwuy302dw77 
+        ethereum: '0xed04E203aa3198ced5CB87bE018d5A1A41D6048b                           
+      };
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById('payment-info').innerHTML = `<p>Send <strong>$${total.toFixed(2)}</strong> in <strong>${type.toUpperCase()}</strong> to this address:<br><code>${addresses[type]}</code></p>`;
     }
 </script>
 </body>
+</html>

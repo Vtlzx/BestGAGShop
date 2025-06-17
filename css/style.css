@@ -182,6 +182,38 @@ header {
   background-color: #555;
 }
 
+.payment-section {
+  margin-top: 1.5rem;
+  background: #f8f8f8;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  text-align: center;
+}
+.payment-section button {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background-color: #222;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.payment-section button:hover {
+  background-color: #ff6600;
+}
+.payment-info {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  word-break: break-all;
+}
+.payment-info a {
+  color: #ff6600;
+  text-decoration: underline;
+}
+
 footer {
   background: #222;
   color: #fff;
