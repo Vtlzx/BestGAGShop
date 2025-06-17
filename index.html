@@ -1,47 +1,46 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PetMart - Tienda de Mascotas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BestGAGShop - Fast Delivery and Trusted!</title>
   <style>
-    /* Reset básico */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f8f9fa;
+      background-color: #f5f5f5;
       color: #333;
-      line-height: 1.6;
     }
 
     header {
-      background: #ff914d;
-      color: white;
+      background: #222;
+      color: #fff;
       padding: 1rem;
       text-align: center;
     }
 
-    nav {
-      margin-top: 0.5rem;
-    }
-
     nav a {
-      color: white;
-      margin: 0 10px;
+      color: #ffcc00;
+      margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
     }
 
     .hero {
-      background: url('https://petmart.fun/_nuxt/img/hero-bg.1500a64.jpg') no-repeat center center/cover;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-shadow: 1px 1px 5px black;
-      font-size: 2rem;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url('https://petmart.fun/_nuxt/img/hero-bg.1500a64.jpg') center/cover;
+      color: #fff;
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
     }
 
     .products {
@@ -53,30 +52,35 @@
 
     .product {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       padding: 1rem;
+      border-radius: 10px;
       text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     .product img {
-      max-width: 100%;
+      width: 100%;
       height: 150px;
       object-fit: contain;
-      margin-bottom: 1rem;
+    }
+
+    .cart-section, .checkout-section {
+      padding: 2rem;
     }
 
     .cart-section {
-      padding: 2rem;
-      background: #fff4e6;
+      background: #fffbea;
+    }
+
+    .checkout-section {
+      background: #e6f7ff;
     }
 
     .cart-item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 1rem;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.5rem;
     }
 
     .cart-item input {
@@ -84,29 +88,37 @@
       text-align: center;
     }
 
-    .checkout-section {
-      padding: 2rem;
-      background: #e6f7ff;
-    }
-
     button {
-      background: #ff914d;
+      background: #222;
       color: white;
-      padding: 0.5rem 1rem;
       border: none;
+      padding: 0.5rem 1rem;
       border-radius: 5px;
       cursor: pointer;
     }
 
     button:hover {
-      background: #e07b3d;
+      background: #555;
+    }
+
+    .crypto-section {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .crypto-section img {
+      width: 180px;
+      margin: 1rem 0;
     }
 
     footer {
-      text-align: center;
-      padding: 1rem;
       background: #222;
       color: #ccc;
+      padding: 1rem;
+      text-align: center;
       margin-top: 2rem;
     }
   </style>
@@ -114,53 +126,61 @@
 <body>
 
   <header>
-    <h1>PetMart</h1>
+    <h1>BestGAGShop</h1>
+    <p>Fast Delivery and Trusted!</p>
     <nav>
-      <a href="#productos">Productos</a>
-      <a href="#carrito">Carrito</a>
-      <a href="#pago">Pago</a>
+      <a href="#productos">Products</a>
+      <a href="#carrito">Cart</a>
+      <a href="#pago">Crypto Payment</a>
     </nav>
   </header>
 
-  <div class="hero">
-    ¡Todo para tu mejor amigo!
-  </div>
+  <section class="hero">
+    <h1>Welcome to BestGAGShop</h1>
+    <p>Memes, gadgets, pet items and more - shipped fast & securely!</p>
+  </section>
 
   <section id="productos" class="products">
     <div class="product">
-      <img src="https://petmart.fun/_nuxt/img/producto1.3b7b3b2.png" alt="Croquetas Premium" />
-      <h3>Croquetas Premium</h3>
-      <p>$250.00 MXN</p>
-      <button onclick="addToCart('Croquetas Premium', 250)">Agregar</button>
+      <img src="https://petmart.fun/_nuxt/img/producto1.3b7b3b2.png" alt="Disco Bee" />
+      <h3>Disco Bee</h3>
+      <p>$24.99</p>
+      <button onclick="addToCart('Disco Bee', $24.99 )">Add to Cart</button>
     </div>
     <div class="product">
-      <img src="https://petmart.fun/_nuxt/img/producto2.5d3a51a.png" alt="Juguete Hueso" />
-      <h3>Juguete Hueso</h3>
-      <p>$100.00 MXN</p>
-      <button onclick="addToCart('Juguete Hueso', 100)">Agregar</button>
+      <img src="https://petmart.fun/_nuxt/img/producto2.5d3a51a.png" alt="Raccoon" />
+      <h3>Raccoon</h3>
+      <p>$13.99</p>
+      <button onclick="addToCart('Raccoon', $13.99 )">Add to Cart</button>
     </div>
     <div class="product">
-      <img src="https://petmart.fun/_nuxt/img/producto3.79a1f21.png" alt="Cama para Mascota" />
-      <h3>Cama Suave</h3>
-      <p>$380.00 MXN</p>
-      <button onclick="addToCart('Cama Suave', 380)">Agregar</button>
+      <img src="https://petmart.fun/_nuxt/img/producto3.79a1f21.png" alt="Dragonfly" />
+      <h3>Dragonfly</h3>
+      <p>$9.99</p>
+      <button onclick="addToCart('Dragonfly', 9.99 )">Add to Cart</button>
     </div>
   </section>
 
   <section id="carrito" class="cart-section">
-    <h2>Carrito de Compras</h2>
+    <h2>Your Cart</h2>
     <div id="cart"></div>
   </section>
 
   <section id="pago" class="checkout-section">
-    <h2>Finalizar Compra</h2>
+    <h2>Crypto Payment (Litecoin)</h2>
     <div id="total"></div>
-    <br />
-    <button onclick="payWithPaypal()">Pagar con PayPal</button>
+
+    <div class="crypto-section">
+      <p><strong>Send LTC to the address below:</strong></p>
+      <p style="font-family: monospace; font-size: 0.9rem;">LQAYLTbGjwQo7qKDQT4Umvmw7jRFYMXVdf</p>
+      <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=ltc1qexampleaddresshere999999xxxyyyzzz" alt="Litecoin QR">
+      <p>Once payment is sent, click below:</p>
+      <button onclick="confirmCrypto()">I have paid</button>
+    </div>
   </section>
 
   <footer>
-    &copy; 2025 PetMart.fun - Todos los derechos reservados.
+    &copy; 2025 BestGAGShop - Fast Delivery and Trusted!
   </footer>
 
   <script>
@@ -198,7 +218,7 @@
       let total = 0;
 
       if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>El carrito está vacío.</p>";
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
         document.getElementById('total').innerHTML = '';
         return;
       }
@@ -211,7 +231,7 @@
               <input type="number" value="${item.quantity}" min="1"
                      onchange="changeQuantity('${item.name}', this.value)">
             </span>
-            <button onclick="removeFromCart('${item.name}')">Eliminar</button>
+            <button onclick="removeFromCart('${item.name}')">Remove</button>
           </div>
         `;
       });
@@ -219,13 +239,15 @@
       document.getElementById('total').innerHTML = `<h3>Total: $${total.toFixed(2)} MXN</h3>`;
     }
 
-    function payWithPaypal() {
+    function confirmCrypto() {
       if (cart.length === 0) {
-        alert("Tu carrito está vacío.");
+        alert("Your cart is empty.");
         return;
       }
-      alert("Redirigiendo a PayPal...");
-      // Aquí podrías usar el botón real de PayPal con su SDK
+      alert("Thanks! We’ll verify your Litecoin transaction and ship shortly.");
+      cart.length = 0;
+      renderCart();
+      document.getElementById('total').innerHTML = '';
     }
   </script>
 
