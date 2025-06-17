@@ -7,15 +7,21 @@
 
   <h3>Selecciona tu método de pago</h3>
   <div class="payment-options">
-    <button onclick="payWithPaypal()">Pagar con PayPal</button>
-    <button onclick="payWithCrypto('litecoin')">Litecoin</button>
-    <button onclick="payWithCrypto('ethereum')">Ethereum</button>
-    <button onclick="payWithCrypto('bitcoin')">Bitcoin</button>
+    <button onclick="showPaymentForm('paypal')">Pagar con PayPal</button>
+    <button onclick="showPaymentForm('litecoin')">Litecoin</button>
+    <button onclick="showPaymentForm('ethereum')">Ethereum</button>
+    <button onclick="showPaymentForm('bitcoin')">Bitcoin</button>
+  </div>
+
+  <div class="payment-form" id="payment-form" style="display: none;">
+    <h4>Ingresa tu usuario de Roblox:</h4>
+    <input type="text" id="roblox-username" placeholder="Usuario de Roblox" required>
+    <div id="payment-instructions"></div>
+    <p>Únete a nuestro Discord: <a href="https://discord.gg/fUTHbgYF" target="_blank">https://discord.gg/fUTHbgYF</a></p>
   </div>
 </section>
 
 <script>
-  // Simular productos en el carrito
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   function renderCart() {
@@ -31,22 +37,39 @@
     }).join('') + `</ul><p>Total: <strong>$${total.toFixed(2)}</strong></p>`;
   }
 
-  function payWithPaypal() {
-    // Reemplaza TU_CORREO con tu cuenta de PayPal real
-    const email = "TU_CORREO@ejemplo.com";
+  function showPaymentForm(method) {
+    const username = document.getElementById('roblox-username').value;
+    const form = document.getElementById('payment-form');
+    const instructions = document.getElementById('payment-instructions');
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const url = `https://www.paypal.com/paypalme/${email}/${total.toFixed(2)}`;
-    window.open(url, '_blank');
-  }
+    let content = '';
 
-  function payWithCrypto(tipo) {
-    const addresses = {
-      litecoin: 'LQAYLTbGjwQo7qKDQT4Umvmw7jRFYMXVdf',
-      ethereum: '0xed04E203aa3198ced5CB87bE018d5A1A41D6048b',
-      bitcoin: 'bc1qr95umq5fd6n5vsmnk9sv3ayzmnwkwuy302dw77'
-    };
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    alert(`Envía ${total.toFixed(2)} USD en ${tipo.toUpperCase()} a la siguiente dirección:\n\n${addresses[tipo]}`);
+    switch (method) {
+      case 'paypal':
+        content = `
+          <p>Envía el pago de <strong>$${total.toFixed(2)}</strong> a:</p>
+          <p><strong>PayPal:</strong> TU_CORREO@ejemplo.com</p>
+          <p>Después del pago, comparte tu usuario de Roblox: <strong>${username || '[tu usuario aquí]'}</strong></p>
+        `;
+        break;
+      case 'litecoin':
+      case 'ethereum':
+      case 'bitcoin':
+        const addresses = {
+          litecoin: 'LQAYLTbGjwQo7qKDQT4Umvmw7jRFYMXVdf',
+          ethereum: '0xed04E203aa3198ced5CB87bE018d5A1A41D6048b',
+          bitcoin: 'bc1qr95umq5fd6n5vsmnk9sv3ayzmnwkwuy302dw77'
+        };
+        content = `
+          <p>Envía <strong>$${total.toFixed(2)}</strong> en <strong>${method.toUpperCase()}</strong> a:</p>
+          <p><strong>${addresses[method]}</strong></p>
+          <p>Después del pago, comparte tu usuario de Roblox: <strong>${username || '[tu usuario aquí]'}</strong></p>
+        `;
+        break;
+    }
+
+    instructions.innerHTML = content;
+    form.style.display = 'block';
   }
 
   renderCart();
@@ -75,5 +98,18 @@
 }
 .payment-options button:hover {
   background-color: #555;
+}
+.payment-form {
+  margin-top: 2rem;
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.payment-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 </style>
